@@ -3,7 +3,7 @@ import React from 'react';
 import Footer from './Footer';
 import Header from './Header';
 import './Header.css';
-
+import { handleScroll } from './App';
 const Doggo = () => {
   return (
     <>
@@ -22,9 +22,11 @@ const Doggo = () => {
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
         <link rel="stylesheet" href="assets/css/main.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+        <script type="text/javascript" src="Main.js"></script>
       </head>
       <Header/>
       <Footer/>
+      
     </>
   );
 };
