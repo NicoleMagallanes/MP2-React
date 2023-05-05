@@ -142,6 +142,7 @@ function Order() {
                 </section>
 
             </body>
+            
             <Footer></Footer>
         </>
     )
