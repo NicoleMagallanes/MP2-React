@@ -5,9 +5,10 @@ import Header from './Header';
 import './Header.css';
 import './Order.css';
 import './Checkout.css';
-import {Commerce} from '@chec/commerce.js';
+import { Commerce } from '@chec/commerce.js';
 import $ from "jquery";
 import { Spaces } from 'spaces/spaces';
+import ProductsList from "./components/ProductsList";
 function Order() {
     return (
         <>
@@ -144,104 +145,5 @@ function Order() {
             <Footer></Footer>
         </>
     )
-};
-    var CommercejsSpace = new Commerce('pk_test_5172082d11c86890854d9c1b25c6ab4c9aebba9bd9fcc', false, {
-        url: 'https://api.chec.io',
-        axiosConfig: {
-            headers: {
-                'Chec-Version': '2020-08-26',
-            },
-        },
-    });
-    CommercejsSpace.cart.retrieve().then(function (data) {
-        Spaces.cartUpdate(data);
-    });
-
-    $(document).ready(function () {
-        $('.product-details-overlay').on('click', function (el) {
-            if ($(el.target).hasClass('product-details-overlay')) {
-                hideProductDetailsModal();
-            }
-        });
-
-        $('#search').hideseek({
-            list: '.hideseek-data',
-            nodata: 'No products found',
-            attribute: 'text',
-            highlight: false,
-            ignore: 'ignore',
-            navigation: false,
-            ignore_accents: false,
-            hidden_mode: false
-        });
-    });
-
-    $('.hover-overlay').on("touchstart", function (e) {
-        "use strict"; //satisfy the code inspectors
-        var link = $(this); //preselect the link
-        if (link.hasClass('hover')) {
-            return true;
-        } else {
-            link.addClass("hover");
-            $('.hover-overlay').not(this).removeClass("hover");
-            e.preventDefault();
-            return false; //extra, and to make sure the function has consistent return points
-        }
-    });
-
-    function cartShow() {
-        $('#shopping-cart #cart-active-overlay ').show();
-        $('#shopping-cart #cart-overview').removeClass('inactive');
-    }
-
-    function cartHide() {
-        $('#shopping-cart #cart-overview').addClass('inactive');
-        $('#shopping-cart #cart-active-overlay ').hide();
-    }
-
-    function showProductDetailsModal(id) {
-        $('.product[data-product-id=' + id + ']').addClass('details-modal');
-        $('body').addClass('no-scroll');
-
-        $('.product[data-product-id=' + id + '] .product-image--main').hide();
-        $('.product[data-product-id=' + id + '] .product-images')
-            .flickity({
-                cellAlign: 'center',
-                adaptiveHeight: true,
-                wrapAround: true,
-            });
-    }
-
-    function hideProductDetailsModal() {
-        $('.product').removeClass('details-modal');
-        $('body').removeClass('no-scroll');
-        $('.product-image--main').show();
-    }
-    // Retrieve the customers current cart (tracked by their browser)
-    Commerce.cart.retrieve().then(cart => console.log(cart));
-
-    // Create a new cart rather than using any existing cart
-    Commerce.cart.refresh().then(cart => console.log(cart));
-
-    //Search Bar
-
-    let input = document.getElementById("search");
-    //get list of value
-    let list = document.querySelectorAll(".list li");
-
-    //function search on the list.
-    function search() {
-        for (let i = 0; i < list.length; i += 1) {
-            //check if the element contains the value of the input
-            if (list[i].innerText.toLowerCase().includes(input.value.toLowerCase())) {
-                list[i].style.display = "block";
-            } else {
-                list[i].style.display = "none";
-            }
-        }
-    }
-
-    //to the change run search.
-    input.addEventListener('input', search);
-
+}
 export default Order;

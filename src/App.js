@@ -1,5 +1,4 @@
 import logo from './logo.svg';
-import React from 'react';
 import Footer from './Footer';
 import Header from './Header';
 import './Header.css';
@@ -9,11 +8,51 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Order from './Order'
 import { Navbar } from 'reactstrap';
 import Commerce from '@chec/commerce.js';
+import React, { useState, useEffect } from 'react';
+import commerce from './lib/commerce';
+import ProductsList from './components/ProductsList';
 
-const commerce = new Commerce('pk_test_5172082d11c86890854d9c1b25c6ab4c9aebba9bd9fcc', false, {
-  url: 'https://api.chec.io',
-});
-commerce.cart.retrieve().then((cart) => console.log(cart));
+const App1 = () => {
+  const [products, setProducts] = useState([]);
+
+  // Because React rendering can be triggered for many different reasons, 
+  // it is best practice to wrap our commerce object method calls into a 
+  // useEffect() hook. This hook acts as the replacment to componentWillMount() 
+  // function when using class components. By leaving the second argument array 
+  // empty, this method will run once before the initial render.
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  /**
+   * Fetch products data from Chec and stores in the products data object.
+   * https://commercejs.com/docs/sdk/products
+   */
+  const fetchProducts = () => {
+    commerce.products.list().then((products) => {
+      setProducts(products.data);
+    }).catch((error) => {
+      console.log('There was an error fetching the products', error)
+    });
+  }
+  const [product, setProduct] = useState([]);
+  useEffect(() => {
+    commerce.products.list().then(result => {
+      setProduct(result.data.map(product => product));
+    });
+  }, []);
+
+
+  console.log('Commerce Product: ', ProductsList);
+
+  return (
+    <div className="productlist">
+      <ProductsList
+        products={products}
+      />
+    </div>
+  );
+};
 
 function App() {
   return (
