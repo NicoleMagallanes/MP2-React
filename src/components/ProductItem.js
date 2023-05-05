@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {stripHtml} from 'string-strip-html';
-
+import { stripHtml } from 'string-strip-html';
 const ProductItem = ({ product }) => {
 
   const { result } = stripHtml(product.description);
@@ -20,8 +19,10 @@ const ProductItem = ({ product }) => {
             {product.price.formatted_with_symbol}
           </p>
         </div>
+        <div className="close">Close</div>
+        <div className="buy-now">Add to Cart</div>
       </div>
-    </div> 
+    </div>
   );
 };
 
