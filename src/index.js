@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Order from './Order';
 import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom';
+import Brand from './Brands';
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
   {
     path: "/order",
     element: <Order />,
+  },
+  {
+    path: "/brands",
+    element: <Brand/>,
   },
 ]);
 
